@@ -12,19 +12,19 @@ const resources = {
 
 const stored =
   typeof localStorage !== 'undefined' ? localStorage.getItem('sgt_lang') : null
-const fallbackLng = 'zh-CN'
+const defaultLng = 'en'
 
 i18n.use(initReactI18next).init({
   resources,
-  lng: stored && resources[stored] ? stored : fallbackLng,
-  fallbackLng: ['zh-CN', 'en'],
+  lng: stored && resources[stored] ? stored : defaultLng,
+  fallbackLng: ['en', 'zh-CN', 'zh-TW'],
   interpolation: { escapeValue: false },
 })
 
 /** Native controls (e.g. <input type="date">) follow <html lang>; keep in sync with UI language. */
 function syncDocumentHtmlLang(lng) {
   if (typeof document === 'undefined') return
-  const code = resources[lng] ? lng : fallbackLng
+  const code = resources[lng] ? lng : defaultLng
   document.documentElement.lang = code
 }
 
