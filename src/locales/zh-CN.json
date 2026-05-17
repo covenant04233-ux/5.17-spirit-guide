@@ -1,0 +1,92 @@
+{
+  "app": {
+    "title": "灵之指引",
+    "subtitle": "以手势唤启牌阵"
+  },
+  "hud": {
+    "language": "语言",
+    "yourQuestion": "想问的事（可选）",
+    "questionPlaceholder": "例如：这段关系将走向何处？",
+    "spread": "牌阵",
+    "oneCard": "单张",
+    "threeCard": "三张",
+    "phase": "阶段",
+    "phase_pre": "仪式前",
+    "phase_wash": "洗牌",
+    "phase_select": "选牌",
+    "phase_reveal": "翻牌"
+  },
+  "scene": {
+    "hint": "右上：阶段与问题；左下：灵视。选牌：食指对准牌面并捏合保持约 1 秒。翻牌：五指收拢呈捧物状保持约 1 秒。启封后底部为智者流式解读。"
+  },
+  "ritual": {
+    "begin": "进入仪式",
+    "washHint": "左右快速挥动手腕两次，完成洗牌波动。",
+    "selectHint": "已选 {{n}} / {{total}}：用灵力点指向目标牌，拇指与食指捏合并保持约 1 秒以确认。",
+    "pinchProgressHint": "捏合越久进度条越长；松手或移开则归零。",
+    "revealHoldHint": "抽出的牌已在牌阵上方排开（牌背朝你）。手心朝向镜头，轻握拳或四指弯向掌心约 1 秒，牌将依次翻面；随后开始解读。",
+    "revealAnimating": "牌阵正在翻开…",
+    "revealedDone": "牌面已启封。下方智者正以流式文字回应你的问题。",
+    "reset": "重来一局",
+    "cameraSuggest": "建议先开启灵视以便追踪手势。"
+  },
+  "seekerWelcome": {
+    "title": "与智者相遇",
+    "greeting": "旅人，欢迎你来到牌阵之前。我是将与你同行的智者。在为你调频「此刻心境」与「解读风格」之前，愿先知晓你的称呼、来到世间的日子，以及你自我所认的 MBTI 类型——这样随后的塔罗解读，才能在传统命理的诗性意象与心理学的观照之间，多一面为你而亮的镜。你可选择略过 MBTI；姓名与生日将帮助我更贴近地与你说话。",
+    "nameLabel": "你希望我怎么称呼你？",
+    "namePlaceholder": "昵称或姓名",
+    "birthLabel": "公历生日",
+    "birthPlaceholder": "YYYY/MM/DD",
+    "birthFormatHint": "请按公历填写，格式为 YYYY/MM/DD（例：2000/05/13）。",
+    "mbtiLabel": "MBTI（可选）",
+    "mbtiUnknown": "暂不清楚 / 略过",
+    "disclaimer": "说明：以下信息仅用于仪式语境下的象征性解读与自我反思，不构成命运定论、医疗建议或任何专业诊断。",
+    "cancel": "稍后再说",
+    "continue": "已告知，继续调频"
+  },
+  "ritualPrep": {
+    "title": "仪式准备 (Ritual Preparation)",
+    "subtitle": "在抽牌前先进行一次心境调频，让智者与你的频率对齐。",
+    "moodQuestion": "此时此刻，你内心的状态更接近哪一种？",
+    "styleQuestion": "你希望今日的“塔罗智者”如何为你解读？",
+    "cancel": "稍后再说",
+    "reuseLast": "沿用上次频率",
+    "confirm": "完成调频，进入仪式",
+    "fire": "焦躁",
+    "sea": "沉静",
+    "fog": "困惑",
+    "wind": "充满动力",
+    "healing": "温柔治愈",
+    "critical": "犀利反思",
+    "mystical": "灵视指引",
+    "direct": "简单粗暴"
+  },
+  "sage": {
+    "title": "智者",
+    "streaming": "正在诉说…",
+    "waiting": "正在聆听星轨…",
+    "missingKey": "未配置模型密钥：请在 .env.local 中任选一种——(1) OpenAI 兼容：VITE_OPENAI_COMPAT_API_KEY + VITE_OPENAI_COMPAT_BASE_URL（如 DeepSeek https://api.deepseek.com/v1），详见 .env.example；(2) 或 VITE_GEMINI_API_KEY。",
+    "comicGenerate": "生成四格漫画",
+    "comicGenerating": "漫画生成中…",
+    "comicSectionTitle": "四格漫画（Seedream 4.0）",
+    "comicPhaseSubmit": "提交至火山方舟…",
+    "comicPhaseRender": "Seedream 4.0 正在绘制四格…",
+    "comicPhaseParse": "接收画面数据…",
+    "comicPhaseDone": "生成完成",
+    "comicNeedDoubaoEnv": "未检测到文生图配置：请在 loveu2901/.env.local 中填写 VITE_DOUBAO_API_KEY=你的方舟Key，保存文件（⌘S）后务必重启 npm run dev。若等号后为空，Vite 读不到密钥。",
+    "comicOpenNew": "新窗口查看原图",
+    "comicAlt": "根据解牌生成的四格漫画",
+    "comicMissingKey": "未配置豆包文生图密钥：请在 .env.local 设置 VITE_DOUBAO_API_KEY（以及可选的 VITE_DOUBAO_BASE_URL / VITE_DOUBAO_SEEDREAM_MODEL）。",
+    "comicEmptyReading": "解牌文本为空，请先完成解读再生成漫画。",
+    "comicDownloaded": "漫画已尝试保存到浏览器默认「下载」文件夹。",
+    "comicDownloadManual": "无法自动保存时：请点击「新窗口查看原图」，在图片上右键「将图像存储为…」。"
+  },
+  "camera": {
+    "start": "开启灵视（摄像头）",
+    "stop": "关闭灵视",
+    "loading": "正在唤醒手势模型…",
+    "retry": "重试",
+    "hint": "浏览器需你点击按钮后才会请求摄像头。将手放在画面内，食指指尖会映射到牌阵上方的光点。",
+    "errorGeneric": "无法启动摄像头或手势模型，请检查权限与网络。"
+  }
+}
