@@ -35,15 +35,13 @@ export default function App() {
                       场景加载失败
                     </h2>
                     <p className="mt-2 font-sans text-sm leading-relaxed text-slate-300">
-                      常见原因是牌面图片从 Wikimedia（`upload.wikimedia.org`）加载失败，导致
-                      three.js 贴图报错后整页空白。
+                      通常是牌面静态资源（如 /card-back.png、/cards/*.jpg）未成功加载。请在新标签页直接打开这些地址，应显示图片而不是报错页。
                     </p>
                     <pre className="mt-3 max-h-40 overflow-auto rounded-lg bg-black/50 p-3 text-left font-mono text-[11px] text-red-200">
                       {String(error?.message || error)}
                     </pre>
                     <p className="mt-3 font-sans text-xs leading-relaxed text-slate-400">
-                      处理方式：确保能访问 `upload.wikimedia.org`（或开代理）后刷新页面；或者把
-                      牌面资源改成本地 `public/` 文件再加载。
+                      若在国内打不开 vercel.app，请换网络/代理，或在 Vercel 控制台确认最近一次 Deploy 为 Ready 后重新部署。
                     </p>
                   </div>
                 </div>

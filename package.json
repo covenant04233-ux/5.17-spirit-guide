@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "download:cards": "python3 scripts/download_rider_waite_cards.py"
+    "download:cards": "python3 scripts/download_rider_waite_cards.py",
+    "compress:cards": "python3 scripts/compress_rider_waite_cards.py",
+    "restore:cards": "python3 scripts/restore_rider_waite_cards.py"
   },
   "dependencies": {
     "@google/generative-ai": "^0.21.0",
