@@ -1,3 +1,5 @@
+import { isSeedreamComicEnabled } from './featureFlags'
+
 /** 开发/预览时走 Vite 同源代理，避免浏览器对火山域名的 CORS 拦截 */
 export function resolveDoubaoApiBaseForFetch() {
   const explicit = import.meta.env.VITE_DOUBAO_BASE_URL?.trim()
@@ -60,6 +62,9 @@ export async function generateSeedreamComic({
   i18nLang,
   onProgress,
 }) {
+  if (!isSeedreamComicEnabled()) {
+    throw new Error('SEEDREAM_DISABLED')
+  }
   const apiKey = import.meta.env.VITE_DOUBAO_API_KEY?.trim()
   const model =
     import.meta.env.VITE_DOUBAO_SEEDREAM_MODEL?.trim() ||

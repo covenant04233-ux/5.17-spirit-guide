@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useGestureSession } from '../../context/GestureSessionContext'
 import { streamSageReply } from '../../lib/streamSage'
+import { isSeedreamComicEnabled } from '../../lib/featureFlags'
 import {
   generateSeedreamComic,
   resolveComicImageDownloadUrl,
@@ -178,7 +179,8 @@ export function SagePanel() {
       else setComicDownloadHint(t('sage.comicDownloadManual'))
     } catch (e) {
       const msg = e?.message || String(e)
-      if (msg === 'MISSING_DOUBAO_IMAGE_KEY') setComicError(t('sage.comicMissingKey'))
+      if (msg === 'SEEDREAM_DISABLED') setComicError(t('sage.comicDisabledPublic'))
+      else if (msg === 'MISSING_DOUBAO_IMAGE_KEY') setComicError(t('sage.comicMissingKey'))
       else if (msg === 'EMPTY_READING_TEXT') setComicError(t('sage.comicEmptyReading'))
       else setComicError(msg)
       setComicProgress(0)
@@ -193,13 +195,12 @@ export function SagePanel() {
 
   if (!cardsRevealed) return null
 
-  const showComicBlock = Boolean(comicUrl || comicBusy)
+  const seedreamEnabled = isSeedreamComicEnabled()
+  const showComicBlock = seedreamEnabled && Boolean(comicUrl || comicBusy)
   const panelBox =
     showComicBlock
       ? 'h-[min(58vh,620px)] max-h-[min(58vh,620px)]'
       : 'h-[min(42vh,420px)] max-h-[min(42vh,420px)]'
-
-  const hasDoubaoKey = Boolean(import.meta.env.VITE_DOUBAO_API_KEY?.trim())
 
   return (
     <div
@@ -224,15 +225,11 @@ export function SagePanel() {
           </div>
         )}
 
+        {seedreamEnabled ? (
         <div className="mt-1 shrink-0 border-t border-white/5 pt-2">
           <p className="mb-1.5 font-sans text-[10px] font-medium uppercase tracking-wider text-amber-200/60">
             {t('sage.comicSectionTitle')}
           </p>
-          {!hasDoubaoKey ? (
-            <p className="mb-2 font-sans text-[11px] leading-relaxed text-amber-200/80">
-              {t('sage.comicNeedDoubaoEnv')}
-            </p>
-          ) : null}
           <div className="flex flex-wrap items-center justify-between gap-2">
             <button
               type="button"
@@ -241,7 +238,7 @@ export function SagePanel() {
                 e.stopPropagation()
                 void handleGenerateComic()
               }}
-              disabled={comicBusy || !text.trim() || !hasDoubaoKey}
+              disabled={comicBusy || !text.trim()}
               className="relative z-[1] rounded-md border border-amber-300/40 bg-amber-500/15 px-3 py-1.5 font-sans text-xs text-amber-100 transition hover:bg-amber-500/25 disabled:cursor-not-allowed disabled:opacity-50"
             >
               {comicBusy ? t('sage.comicGenerating') : t('sage.comicGenerate')}
@@ -283,26 +280,26 @@ export function SagePanel() {
               </div>
             </div>
           )}
+          {comicError ? (
+            <p className="mt-2 font-sans text-xs leading-relaxed text-red-300/90">{comicError}</p>
+          ) : null}
+          {comicDownloadHint ? (
+            <p className="font-sans text-xs leading-relaxed text-emerald-300/90">
+              {comicDownloadHint}
+            </p>
+          ) : null}
+
+          {comicUrl ? (
+            <div className="mt-1 overflow-hidden rounded-lg border border-amber-500/20 bg-black/40 shadow-inner">
+              <img
+                src={resolveComicImageDownloadUrl(comicUrl)}
+                alt={t('sage.comicAlt')}
+                className="h-auto max-h-[min(38vh,360px)] w-full object-contain"
+                loading="lazy"
+              />
+            </div>
+          ) : null}
         </div>
-
-        {comicError ? (
-          <p className="font-sans text-xs leading-relaxed text-red-300/90">{comicError}</p>
-        ) : null}
-        {comicDownloadHint ? (
-          <p className="font-sans text-xs leading-relaxed text-emerald-300/90">
-            {comicDownloadHint}
-          </p>
-        ) : null}
-
-        {comicUrl ? (
-          <div className="mt-1 overflow-hidden rounded-lg border border-amber-500/20 bg-black/40 shadow-inner">
-            <img
-              src={resolveComicImageDownloadUrl(comicUrl)}
-              alt={t('sage.comicAlt')}
-              className="h-auto max-h-[min(38vh,360px)] w-full object-contain"
-              loading="lazy"
-            />
-          </div>
         ) : null}
       </div>
     </div>
